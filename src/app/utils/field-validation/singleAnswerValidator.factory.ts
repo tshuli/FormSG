@@ -1,6 +1,6 @@
 import { left } from 'fp-ts/lib/Either'
 
-import { IField } from '../../../types/field/baseField'
+import { IField, ProcessedSingleAnswerResponse } from '../../../types'
 import {
   isHomeNumberField,
   isLongTextField,
@@ -12,7 +12,6 @@ import {
   isShortTextField,
 } from '../../../types/field/utils/guards'
 import { ResponseValidator } from '../../../types/field/utils/validation'
-import { ProcessedSingleAnswerResponse } from '../../modules/submission/submission.types'
 
 import { constructHomeNoValidator } from './validators/homeNoValidator'
 import { constructMobileNoValidator } from './validators/mobileNoValidator'

@@ -7,12 +7,16 @@ import FeatureManager, {
   FeatureNames,
   RegisteredFeature,
 } from '../../../config/feature-manager'
-import { IFieldSchema, IHashes, IMyInfoHashSchema } from '../../../types'
+import {
+  IFieldSchema,
+  IHashes,
+  IMyInfoHashSchema,
+  ProcessedFieldResponse,
+} from '../../../types'
 import {
   DatabaseError,
   MissingFeatureError,
 } from '../../modules/core/core.errors'
-import { ProcessedFieldResponse } from '../../modules/submission/submission.types'
 
 import {
   CircuitBreakerError,

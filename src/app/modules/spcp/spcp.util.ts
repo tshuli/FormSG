@@ -3,9 +3,13 @@ import crypto from 'crypto'
 import { StatusCodes } from 'http-status-codes'
 
 import { createLoggerWithLabel } from '../../../config/logger'
-import { AuthType, BasicField, MapRouteError } from '../../../types'
+import {
+  AuthType,
+  BasicField,
+  MapRouteError,
+  ProcessedSingleAnswerResponse,
+} from '../../../types'
 import { MissingFeatureError } from '../core/core.errors'
-import { ProcessedSingleAnswerResponse } from '../submission/submission.types'
 
 import {
   CreateRedirectUrlError,

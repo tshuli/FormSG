@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt'
 import mongoose from 'mongoose'
 import { mocked } from 'ts-jest/utils'
 
-import { ProcessedFieldResponse } from 'src/app/modules/submission/submission.types'
 import { MyInfoService } from 'src/app/services/myinfo/myinfo.service'
 import getMyInfoHashModel from 'src/app/services/myinfo/myinfo_hash.model'
 import {
@@ -14,6 +13,7 @@ import {
   IFieldSchema,
   IHashes,
   IMyInfoHashSchema,
+  ProcessedFieldResponse,
 } from 'src/types'
 
 import dbHandler from 'tests/unit/backend/helpers/jest-db'

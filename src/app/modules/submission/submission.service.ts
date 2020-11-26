@@ -7,7 +7,12 @@ import {
   getLogicUnitPreventingSubmit,
   getVisibleFieldIds,
 } from '../../../shared/util/logic'
-import { FieldResponse, IFieldSchema, IFormSchema } from '../../../types'
+import {
+  FieldResponse,
+  IFieldSchema,
+  IFormSchema,
+  ProcessedFieldResponse,
+} from '../../../types'
 import getSubmissionModel from '../../models/submission.server.model'
 import { createQueryWithDateParam, isMalformedDate } from '../../utils/date'
 import { validateField } from '../../utils/field-validation'
@@ -18,7 +23,6 @@ import {
   ProcessingError,
   ValidateFieldError,
 } from './submission.errors'
-import { ProcessedFieldResponse } from './submission.types'
 import { getModeFilter } from './submission.utils'
 
 const logger = createLoggerWithLabel(module)

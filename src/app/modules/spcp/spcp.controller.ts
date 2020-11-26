@@ -4,10 +4,9 @@ import { StatusCodes } from 'http-status-codes'
 
 import config from '../../../config/config'
 import { createLoggerWithLabel } from '../../../config/logger'
-import { AuthType, WithForm } from '../../../types'
+import { AuthType, ProcessedFieldResponse, WithForm } from '../../../types'
 import { createReqMeta } from '../../utils/request'
 import * as FormService from '../form/form.service'
-import { ProcessedFieldResponse } from '../submission/submission.types'
 
 import { SpcpFactory } from './spcp.factory'
 import { JwtName, LoginPageValidationResult } from './spcp.types'

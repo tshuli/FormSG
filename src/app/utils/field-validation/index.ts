@@ -1,14 +1,14 @@
 import { Either, isLeft, left, right } from 'fp-ts/lib/Either'
 import { err, ok, Result } from 'neverthrow'
 
+import { createLoggerWithLabel } from '../../../config/logger'
 import {
+  BasicField,
+  FieldResponse,
+  IField,
   ProcessedFieldResponse,
   ProcessedSingleAnswerResponse,
-} from '../../../app/modules/submission/submission.types'
-import { createLoggerWithLabel } from '../../../config/logger'
-import { IField } from '../../../types/field/baseField'
-import { BasicField } from '../../../types/field/fieldTypes'
-import { FieldResponse } from '../../../types/response'
+} from '../../../types'
 import { isProcessedSingleAnswerResponse } from '../../../types/response/guards'
 import { ValidateFieldError } from '../../modules/submission/submission.errors'
 

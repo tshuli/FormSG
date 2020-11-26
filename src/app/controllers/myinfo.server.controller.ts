@@ -5,11 +5,10 @@ import { RequestHandler } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { StatusCodes } from 'http-status-codes'
 
-import { ProcessedFieldResponse } from 'src/app/modules/submission/submission.types'
-
 import { createLoggerWithLabel } from '../../config/logger'
 import {
   AuthType,
+  ProcessedFieldResponse,
   ResWithHashedFields,
   ResWithSpcpSession,
   ResWithUinFin,

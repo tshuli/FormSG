@@ -9,7 +9,6 @@ import {
   MalformedParametersError,
 } from 'src/app/modules/core/core.errors'
 import * as SubmissionService from 'src/app/modules/submission/submission.service'
-import { ProcessedFieldResponse } from 'src/app/modules/submission/submission.types'
 import { createQueryWithDateParam } from 'src/app/utils/date'
 import { FIELDS_TO_REJECT } from 'src/app/utils/field-validation/config'
 import * as LogicUtil from 'src/shared/util/logic'
@@ -26,6 +25,7 @@ import {
   ISingleAnswerResponse,
   LogicType,
   PossibleField,
+  ProcessedFieldResponse,
   ResponseMode,
   SubmissionType,
 } from 'src/types'

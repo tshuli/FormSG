@@ -14,12 +14,12 @@ import {
   IHashes,
   MapRouteError,
   MyInfoAttribute,
+  ProcessedFieldResponse,
 } from '../../../types'
 import {
   DatabaseError,
   MissingFeatureError,
 } from '../../modules/core/core.errors'
-import { ProcessedFieldResponse } from '../../modules/submission/submission.types'
 
 import {
   HashDidNotMatchError,

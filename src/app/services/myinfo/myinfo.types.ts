@@ -1,5 +1,9 @@
-import { IFieldSchema, IMyInfo, MyInfoAttribute } from '../../../types'
-import { ProcessedFieldResponse } from '../../modules/submission/submission.types'
+import {
+  IFieldSchema,
+  IMyInfo,
+  MyInfoAttribute,
+  ProcessedFieldResponse,
+} from '../../../types'
 
 export interface IPossiblyPrefilledField extends IFieldSchema {
   fieldValue?: string

@@ -1,7 +1,7 @@
 import {
   ProcessedFieldResponse,
   ProcessedSingleAnswerResponse,
-} from 'src/app/modules/submission/submission.types'
+} from 'src/types'
 
 const isProcessedFieldResponse = (
   response: any,

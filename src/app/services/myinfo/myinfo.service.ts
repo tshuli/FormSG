@@ -18,9 +18,9 @@ import {
   IFieldSchema,
   IHashes,
   IMyInfoHashSchema,
+  ProcessedFieldResponse,
 } from '../../../types'
 import { DatabaseError } from '../../modules/core/core.errors'
-import { ProcessedFieldResponse } from '../../modules/submission/submission.types'
 
 import {
   CircuitBreakerError,
