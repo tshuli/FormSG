@@ -7,7 +7,12 @@ import {
   getLogicUnitPreventingSubmit,
   getVisibleFieldIds,
 } from '../../../shared/util/logic'
-import { FieldResponse, IFieldSchema, IFormSchema } from '../../../types'
+import {
+  FieldResponse,
+  IFieldSchema,
+  IFormSchema,
+  ResponseMode,
+} from '../../../types'
 import getSubmissionModel from '../../models/submission.server.model'
 import { createQueryWithDateParam, isMalformedDate } from '../../utils/date'
 import { validateField } from '../../utils/field-validation'
@@ -121,7 +126,10 @@ export const getProcessedResponses = (
 
     const processingResponse: ProcessedFieldResponse = {
       ...response,
-      isVisible: visibleFieldIds.has(responseId),
+      isVisible:
+        form.responseMode === ResponseMode.Encrypt
+          ? 'answer' in response && response.answer.trim() !== ''
+          : visibleFieldIds.has(responseId),
       question: formField.getQuestion(),
     }
 

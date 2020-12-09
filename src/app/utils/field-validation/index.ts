@@ -13,6 +13,7 @@ import { ValidateFieldError } from '../../modules/submission/submission.errors'
 
 import { ALLOWED_VALIDATORS, FIELDS_TO_REJECT } from './config'
 import {
+  isProcessedAttachmentResponse,
   isProcessedCheckboxResponse,
   isProcessedSingleAnswerResponse,
   isProcessedTableResponse,
@@ -43,6 +44,35 @@ const doFieldTypesMatch = (
         `Response fieldType (${response.fieldType}) did not match field ${formField.fieldType}`,
       )
     : right(undefined)
+}
+
+/**
+ * Returns true if response appears on a hidden field.
+ * This may happen if a submission is made programatically to try and bypass form logic.
+ * @param response The submitted response
+ */
+const isResponsePresentOnHiddenField = (response: FieldResponse): boolean => {
+  if (isProcessedSingleAnswerResponse(response)) {
+    if (!response.isVisible && response.answer.trim() !== '') {
+      return true
+    }
+  } else if (isProcessedCheckboxResponse(response)) {
+    if (!response.isVisible && response.answerArray.length > 0) {
+      return true
+    }
+  } else if (isProcessedTableResponse(response)) {
+    if (
+      !response.isVisible &&
+      !response.answerArray.every((row) => row.every((elem) => elem === ''))
+    ) {
+      return true
+    }
+  } else if (isProcessedAttachmentResponse(response)) {
+    if (!response.isVisible && response.filename.trim() !== '') {
+      return true
+    }
+  }
+  return false
 }
 
 /**
@@ -104,6 +134,16 @@ export const validateField = (
 
   if (isLeft(fieldTypeEither)) {
     return err(new ValidateFieldError(fieldTypeEither.left))
+  }
+
+  // Check for hidden fields only on email submissions
+  // Because encrypt mode submission responses are encrypted except for phone number and email
+  // Avoids case where phone number and email is hidden behind logic for encrypt mode
+  // And subsequently fails this check as isVisible cannot be updated for encrypt mode submissions
+  if (isResponsePresentOnHiddenField(response)) {
+    return err(
+      new ValidateFieldError(`Attempted to submit response on a hidden field`),
+    )
   }
 
   if (isProcessedSingleAnswerResponse(response)) {
