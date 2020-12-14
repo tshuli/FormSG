@@ -9,7 +9,6 @@ const ALLOWED_VALIDATORS = [
   'DropdownValidator',
   'NumberValidator',
   'MobileValidator',
-  'RatingValidator',
   'TextValidator',
   'TableValidator',
   'AttachmentValidator',
