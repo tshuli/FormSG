@@ -1,16 +1,9 @@
 import { ValidateFieldError } from 'src/app/modules/submission/submission.errors'
 import { validateField } from 'src/app/utils/field-validation'
-import EmailValidator from 'src/app/utils/field-validation/validators/EmailValidator.class'
 import { BasicField } from 'src/types/field/fieldTypes'
 import { ISingleAnswerResponse } from 'src/types/response'
 
 describe('Email field validation', () => {
-  beforeEach(() => {
-    jest
-      .spyOn(EmailValidator.prototype, '_isSignatureValid')
-      .mockImplementation(() => true)
-  })
-
   it('should allow valid emails', () => {
     const formField = {
       _id: 'abc123',
