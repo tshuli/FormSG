@@ -117,6 +117,7 @@ export const validateField = (
         case BasicField.HomeNo:
         case BasicField.Radio:
         case BasicField.Rating:
+        case BasicField.Email:
         case BasicField.Date:
         case BasicField.Decimal:
         case BasicField.Mobile: {

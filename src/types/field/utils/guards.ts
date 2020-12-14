@@ -2,6 +2,7 @@
 import {
   IDateField,
   IDecimalField,
+  IEmailField,
   IHomenoField,
   ILongTextField,
   IMobileField,
@@ -67,4 +68,8 @@ export const isDecimalField = (
   formField: IField,
 ): formField is IDecimalField => {
   return formField.fieldType === BasicField.Decimal
+}
+
+export const isEmailField = (formField: IField): formField is IEmailField => {
+  return formField.fieldType === BasicField.Email
 }
