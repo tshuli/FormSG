@@ -125,6 +125,25 @@
               </div>
             </div>
           </div>
+
+          <hr />
+
+          <div class="row">
+            <div class="myinfo-category">CUSTOM API</div>
+            <div
+              class="col-sm-6 col-md-6 col-lg-6 col-xl-6 add-field-panel"
+              ng-repeat="type in addField.customAPITypes"
+            >
+              <div class="add-field-item" ng-click="addNewCustomAPI(type.name)">
+                <div class="add-field-icon">
+                  <field-icon-component
+                    type-name="{{type.name}}"
+                  ></field-icon-component>
+                </div>
+                <div class="add-field-text">{{type.value}}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- MyInfo activate prompt overlay, only show if authType is not

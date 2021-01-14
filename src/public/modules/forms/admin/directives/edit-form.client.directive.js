@@ -454,4 +454,5 @@ function editFormController(
   $scope.addField = {}
   $scope.addField.types = FormFields.basicTypes
   $scope.addField.myInfoTypes = FormFields.myInfoTypes
+  $scope.addField.customAPITypes = FormFields.customAPITypes
 }

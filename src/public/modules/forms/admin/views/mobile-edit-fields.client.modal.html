@@ -110,6 +110,27 @@
             </div>
           </div>
         </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="myinfo-category">CUSTOM API</div>
+          <div class="add-field-modal-panel">
+            <div ng-repeat="type in vm.addField.customAPITypes">
+              <div
+                ng-class="{'add-field-item':true, 'inactive': vm.isStorageForm}"
+                ng-click="vm.isStorageForm || vm.addNewCustomAPI(type.name)"
+              >
+                <div class="add-field-icon">
+                  <field-icon-component
+                    type-name="{{type.name}}"
+                  ></field-icon-component>
+                </div>
+                <div class="add-field-text">{{type.value}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="myinfo-disable-mobile" ng-if="vm.myform.authType !== 'SP'">

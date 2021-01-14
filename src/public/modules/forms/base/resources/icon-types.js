@@ -55,6 +55,8 @@ const iconTypeMap = {
   mobileno: 'bx bx-mobile-alt',
   marriagecertno: 'bx bx-award',
   gradyear: 'bx bx-calendar',
+  // custom API fields
+  singlevalueapi: 'bx bx-data',
 }
 
 module.exports = {

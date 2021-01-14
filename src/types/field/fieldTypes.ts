@@ -52,3 +52,7 @@ export enum MyInfoAttribute {
   WorkpassExpiryDate = 'workpassexpirydate',
   GraduationYear = 'gradyear',
 }
+
+export enum CustomAPIField {
+  Single = 'singlevalueapi',
+}

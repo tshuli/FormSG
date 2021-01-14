@@ -4,12 +4,16 @@ const get = require('lodash/get')
 
 const { types: basicTypes } = require('../../../../shared/resources/basic')
 const { types: myInfoTypes } = require('../../../../shared/resources/myinfo')
+const {
+  types: customAPITypes,
+} = require('../../../../shared/resources/customapi')
 
 angular.module('forms').service('FormFields', [FormFields])
 
 function FormFields() {
   this.basicTypes = basicTypes
   this.myInfoTypes = myInfoTypes
+  this.customAPITypes = customAPITypes
   this.customValFields = ['textarea', 'textfield', 'number']
 
   /**
