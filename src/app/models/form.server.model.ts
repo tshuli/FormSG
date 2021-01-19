@@ -7,6 +7,7 @@ import {
   AuthType,
   BasicField,
   Colors,
+  CustomAPIField,
   FormLogoState,
   FormMetaView,
   FormOtpData,
@@ -49,6 +50,7 @@ import {
   createRatingFieldSchema,
   createSectionFieldSchema,
   createShortTextFieldSchema,
+  createSingleValueAPIFieldSchema,
   createStatementFieldSchema,
   createTableFieldSchema,
   createYesNoFieldSchema,
@@ -332,6 +334,11 @@ const compileFormModel = (db: Mongoose): IFormModel => {
     createStatementFieldSchema(),
   )
   FormFieldPath.discriminator(BasicField.Section, createSectionFieldSchema())
+  FormFieldPath.discriminator(
+    CustomAPIField.Single,
+    createSingleValueAPIFieldSchema(),
+  )
+
   FormFieldPath.discriminator(BasicField.Table, TableFieldSchema)
   const TableColumnPath = TableFieldSchema.path(
     'columns',

@@ -15,6 +15,7 @@ import createRadioFieldSchema from './radioField'
 import createRatingFieldSchema from './ratingField'
 import createSectionFieldSchema from './sectionField'
 import createShortTextFieldSchema from './shortTextField'
+import createSingleValueAPIFieldSchema from './singleValueAPIField'
 import createStatementFieldSchema from './statementField'
 import createTableFieldSchema from './tableField'
 import createYesNoFieldSchema from './yesNoField'
@@ -35,6 +36,7 @@ export {
   createRadioFieldSchema,
   createRatingFieldSchema,
   createSectionFieldSchema,
+  createSingleValueAPIFieldSchema,
   createShortTextFieldSchema,
   createStatementFieldSchema,
   createTableFieldSchema,
