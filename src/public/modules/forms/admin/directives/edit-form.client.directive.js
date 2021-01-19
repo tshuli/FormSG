@@ -312,7 +312,7 @@ function editFormController(
    * */
   $scope.addNewField = function (fieldType) {
     if (!fieldType) return
-    let newField = FieldFactory.createDefaultBasicField(fieldType)
+    let newField = FieldFactory.createDefaultBasicOrCustomAPIField(fieldType)
     $scope.openEditModal(newField)
   }
 

@@ -134,7 +134,8 @@
               class="col-sm-6 col-md-6 col-lg-6 col-xl-6 add-field-panel"
               ng-repeat="type in addField.customAPITypes"
             >
-              <div class="add-field-item" ng-click="addNewCustomAPI(type.name)">
+              <div class="add-field-item" ng-click="addNewField(type.name)">
+                <!-- Custom API uses addNewField because it has customisable params -->
                 <div class="add-field-icon">
                   <field-icon-component
                     type-name="{{type.name}}"

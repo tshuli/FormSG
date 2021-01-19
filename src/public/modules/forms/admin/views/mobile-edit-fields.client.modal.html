@@ -119,8 +119,9 @@
             <div ng-repeat="type in vm.addField.customAPITypes">
               <div
                 ng-class="{'add-field-item':true, 'inactive': vm.isStorageForm}"
-                ng-click="vm.isStorageForm || vm.addNewCustomAPI(type.name)"
+                ng-click="vm.isStorageForm || vm.addNewField(type.name)"
               >
+                <!-- Custom API uses addNewField because it has customisable params -->
                 <div class="add-field-icon">
                   <field-icon-component
                     type-name="{{type.name}}"

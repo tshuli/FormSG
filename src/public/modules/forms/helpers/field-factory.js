@@ -18,13 +18,16 @@ const {
   TextField,
 } = require('../viewmodels/Fields')
 const { types: basicTypes } = require('../../../../shared/resources/basic')
+const {
+  types: customAPITypes,
+} = require('../../../../shared/resources/customapi')
 
 const createFieldFromData = (fieldData) => {
   const fieldClass = getClass(fieldData.fieldType)
   return new fieldClass(fieldData)
 }
 
-const createDefaultBasicField = (fieldType) => {
+const createDefaultBasicOrCustomAPIField = (fieldType) => {
   const name = getFieldName(fieldType)
   const fieldData = {
     fieldName: name,
@@ -35,7 +38,8 @@ const createDefaultBasicField = (fieldType) => {
 }
 
 const getFieldName = (fieldType) => {
-  const field = basicTypes.find((f) => f.name === fieldType)
+  const basicAndCustomAPITypes = [...basicTypes, ...customAPITypes]
+  const field = basicAndCustomAPITypes.find((f) => f.name === fieldType)
   if (field) return field.value
   return undefined
 }
@@ -77,6 +81,7 @@ const getClass = (fieldType) => {
       return SingleAnswerField
     case 'image':
     case 'statement':
+    case 'singlevalueapi':
       return NoAnswerField
     default:
       throw new Error('Invalid fieldtype passed to createFieldFromData.')
@@ -85,5 +90,5 @@ const getClass = (fieldType) => {
 
 module.exports = {
   createFieldFromData,
-  createDefaultBasicField,
+  createDefaultBasicOrCustomAPIField,
 }

@@ -4,6 +4,7 @@ import UIDGenerator from 'uid-generator'
 import {
   AuthType,
   BasicField,
+  CustomAPIField,
   IFieldSchema,
   IMyInfoSchema,
   ITableFieldSchema,
@@ -13,7 +14,7 @@ import {
 
 const uidgen3 = new UIDGenerator(256, UIDGenerator.BASE62)
 
-const VALID_FIELD_TYPES = Object.values(BasicField)
+const VALID_FIELD_TYPES = Object.values({ ...BasicField, ...CustomAPIField })
 
 export const MyInfoSchema = new Schema<IMyInfoSchema>(
   {
