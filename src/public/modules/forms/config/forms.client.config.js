@@ -11,7 +11,11 @@ function addFieldNumber() {
       let numHiddenFields = 0
 
       fields.forEach(function (field, index) {
-        if (['section', 'statement', 'image'].includes(field.fieldType)) {
+        if (
+          ['section', 'statement', 'image', 'singlevalueapi'].includes(
+            field.fieldType,
+          )
+        ) {
           nonResponseFields++
         } else if (!field.isVisible) {
           numHiddenFields++
