@@ -1,5 +1,8 @@
-const FIELDS_TO_REJECT = require('../../../shared/resources/basic')
-  .types.filter((f) => !f.submitted)
+const { types: basicTypes } = require('../../../shared/resources/basic')
+const { types: customAPITypes } = require('../../../shared/resources/customapi')
+
+const FIELDS_TO_REJECT = [...basicTypes, ...customAPITypes]
+  .filter((f) => !f.submitted)
   .map((f) => f.name)
 
 // deprecated
