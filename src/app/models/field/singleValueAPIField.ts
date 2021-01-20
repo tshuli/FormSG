@@ -9,6 +9,7 @@ const createSingleValueAPIFieldSchema = () => {
       required: true,
     },
     apiendpoint: { type: String, required: true },
+    apijsonkey: { type: String, required: true },
   })
 }
 export default createSingleValueAPIFieldSchema
