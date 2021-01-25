@@ -136,6 +136,7 @@ module.exports = function (app) {
       publicForms.isFormPublicCheck,
       SpcpController.addSpcpSessionInfo,
       myInfoController.addMyInfo,
+      SpcpController.addCustomAPIInfo,
       forms.read(forms.REQUEST_TYPE.PUBLIC),
     )
 

@@ -1,10 +1,19 @@
+import axios from 'axios'
 import { RequestHandler } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { StatusCodes } from 'http-status-codes'
+import { LeanDocument } from 'mongoose'
 
 import config from '../../../config/config'
 import { createLoggerWithLabel } from '../../../config/logger'
-import { AuthType, WithForm } from '../../../types'
+import {
+  AuthType,
+  CustomAPIField,
+  IPopulatedForm,
+  WithAPI,
+  WithForm,
+  WithJsonForm,
+} from '../../../types'
 import { createReqMeta } from '../../utils/request'
 import * as FormService from '../form/form.service'
 import { ProcessedFieldResponse } from '../submission/submission.types'
@@ -82,6 +91,97 @@ export const handleValidate: RequestHandler<
       })
       const { statusCode, errorMessage } = mapRouteError(error)
       return res.status(statusCode).json({ message: errorMessage })
+    })
+}
+
+/**
+ * Adds custom API data if form-filler is SPCP Authenticated and there is API field
+ * @param req - Express request object
+ * @param res - Express response object
+ * @param next - Express next middleware function
+ */
+
+export const addCustomAPIInfo: RequestHandler<ParamsDictionary> = async (
+  req,
+  res,
+  next,
+) => {
+  let form: IPopulatedForm | LeanDocument<IPopulatedForm>
+  // Check as addMyInfo may or may not return WithJsonForm
+  if (typeof (req as WithForm<typeof req>).form.toJSON === 'function') {
+    form = (req as WithForm<typeof req>).form.toJSON()
+  } else {
+    form = (req as WithJsonForm<typeof req>).form
+  }
+  const { form_fields } = form
+
+  // Do nothing if there are no custom API fields
+  if (form_fields.every((field) => field.fieldType !== CustomAPIField.Single)) {
+    return next()
+  }
+
+  const apiPromises: Promise<void>[] = []
+
+  // From addSpcpSessionInfo
+  const { userName } = res.locals.spcpSession || {}
+  if (userName) {
+    form_fields.forEach((field) => {
+      if (field.fieldType === CustomAPIField.Single) {
+        const apiField = field as WithAPI<typeof field>
+        const { apikey, apiendpoint, apijsonkey } = apiField
+        const apiPromise = axios
+          .get(apiendpoint, {
+            headers: {
+              'x-api-key': apikey,
+            },
+            params: {
+              nric: userName,
+            },
+          })
+          .then((response) => {
+            if (response.data[apijsonkey]) {
+              apiField.apiresponse = response.data[apijsonkey]
+            } else {
+              apiField.apiresponse =
+                'Unable to retrieve data. Please refresh the page and try again, or contact the agency which gave you the link.'
+              logger.error({
+                message: 'Invalid apijsonkey for custom api',
+                meta: {
+                  action: 'addCustomAPIInfo',
+                  apiEndPoint: apiendpoint,
+                  ...createReqMeta(req),
+                },
+              })
+            }
+          })
+          .catch((error) => {
+            apiField.apiresponse =
+              'Unable to retrieve data. Please refresh the page and try again, or contact the agency which gave you the link.'
+            logger.error({
+              message: 'Failed to retrieve data from custom api',
+              meta: {
+                action: 'addCustomAPIInfo',
+                apiEndPoint: apiendpoint,
+                ...createReqMeta(req),
+              },
+              error,
+            })
+          })
+        apiPromises.push(apiPromise)
+      }
+    })
+  }
+
+  Promise.all(apiPromises)
+    .then(() => {
+      // eslint-disable-next-line prettier/prettier
+      (req as WithJsonForm<typeof req>).form = form
+      return next()
+    })
+    .catch(() => {
+      // eslint-disable-next-line prettier/prettier
+      (req as WithJsonForm<typeof req>).form = form
+      return next()
     })
 }
 

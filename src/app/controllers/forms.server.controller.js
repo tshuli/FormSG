@@ -73,6 +73,14 @@ exports.read = (requestType) =>
     // For non-admin forms, we have more extensive scrubbing of irrelevant fields
     if (requestType !== requestTypes.ADMIN) {
       form = _.pick(form, formPublicFields)
+
+      // Delete apikey, apiendpoint, and apijsonkey for customapi field
+      const { form_fields } = form
+      for (const field of form_fields) {
+        if (field.fieldType === 'singlevalueapi') {
+          field.apikey = field.apiendpoint = field.apijsonkey = undefined
+        }
+      }
     }
 
     return res.json({

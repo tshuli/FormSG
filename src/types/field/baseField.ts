@@ -2,7 +2,7 @@ import { Document } from 'mongoose'
 
 import { IFormSchema } from '../form'
 
-import { BasicField, MyInfoAttribute } from './fieldTypes'
+import { BasicField, CustomAPIField, MyInfoAttribute } from './fieldTypes'
 
 export interface IMyInfo {
   attr: MyInfoAttribute
@@ -21,7 +21,7 @@ export interface IField {
   description: string
   required: boolean
   disabled: boolean
-  fieldType: BasicField
+  fieldType: BasicField | CustomAPIField
   myInfo?: IMyInfo
 }
 

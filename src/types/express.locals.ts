@@ -12,6 +12,13 @@ export type WithForm<T> = T & {
   form: IPopulatedForm
 }
 
+export type WithAPI<T> = T & {
+  apikey: string
+  apiendpoint: string
+  apijsonkey: string
+  apiresponse: string
+}
+
 export type WithJsonForm<T> = T & {
   form: LeanDocument<IPopulatedForm>
 }
