@@ -242,6 +242,7 @@ require('./modules/forms/base/components/field-radiobutton.client.component.js')
 require('./modules/forms/base/components/field-checkbox.client.component.js')
 require('./modules/forms/base/components/field-table.client.component.js')
 require('./modules/forms/base/components/field-image.client.component.js')
+require('./modules/forms/base/components/field-singlevalueapi.client.component.js')
 require('./modules/forms/base/components/field-mobile.client.component.js')
 require('./modules/forms/base/components/field-homeno.client.component.js')
 require('./modules/forms/base/components/field-nric.client.component.js')
@@ -595,6 +596,10 @@ app.run([
     $templateCache.put(
       'modules/forms/base/componentViews/field-image.client.view.html',
       require('./modules/forms/base/componentViews/field-image.client.view.html'),
+    )
+    $templateCache.put(
+      'modules/forms/base/componentViews/field-singlevalueapi.client.view.html',
+      require('./modules/forms/base/componentViews/field-singlevalueapi.client.view.html'),
     )
     $templateCache.put(
       'modules/forms/base/componentViews/field-mobile.client.view.html',
