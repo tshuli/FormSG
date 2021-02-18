@@ -184,17 +184,16 @@ export const validateField = (
         }
       }
     }
-  } else if (
-    isProcessedAttachmentResponse(response) &&
-    attachmentRequiresValidation(formField, response)
-  ) {
-    const validator = constructAttachmentFieldValidator(formField)
-    const validEither = validator(response)
-    if (isLeft(validEither)) {
-      logInvalidAnswer(formId, formField, validEither.left)
-      return err(new ValidateFieldError('Invalid answer submitted'))
+  } else if (isProcessedAttachmentResponse(response)) {
+    if (attachmentRequiresValidation(formField, response)) {
+      const validator = constructAttachmentFieldValidator(formField)
+      const validEither = validator(response)
+      if (isLeft(validEither)) {
+        logInvalidAnswer(formId, formField, validEither.left)
+        return err(new ValidateFieldError('Invalid answer submitted'))
+      }
+      return ok(true)
     }
-    return ok(true)
   } else if (
     isProcessedCheckboxResponse(response) ||
     isProcessedTableResponse(response)
